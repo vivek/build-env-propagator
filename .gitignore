@@ -1,0 +1,6 @@
+work/
+target/
+.idea/
+*.iml
+*.iws
+*.ipr

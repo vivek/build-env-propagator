@@ -1,0 +1,6 @@
+<!--
+  This view is used to render the installed plugins page.
+-->
+<div>
+  Copies environment variables added or modified during one build to the next.
+</div>
