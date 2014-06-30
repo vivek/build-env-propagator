@@ -32,7 +32,7 @@ public class SetEnvVariable extends CommandDuringBuild {
     protected int run() throws Exception {
         Run r = getCurrentlyBuilding();
 
-        EnvCopyAction copyAction = r.getAction(EnvCopyAction.class);
+        EnvMapperAction copyAction = r.getAction(EnvMapperAction.class);
         copyAction.add(name,value);
         return 0;
     }

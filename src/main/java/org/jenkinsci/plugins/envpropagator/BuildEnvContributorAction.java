@@ -12,7 +12,7 @@ import hudson.model.EnvironmentContributingAction;
 public class BuildEnvContributorAction implements EnvironmentContributingAction {
 
     public void buildEnvVars(AbstractBuild<?, ?> build, EnvVars env) {
-        EnvCopyAction action = build.getAction(EnvCopyAction.class);
+        EnvMapperAction action = build.getAction(EnvMapperAction.class);
         action.merge(env);
     }
 

@@ -39,7 +39,7 @@ public class BuildEnvPropagationTest {
         FreeStyleBuild build = project.scheduleBuild2(0).get();
         Assert.assertEquals(Result.SUCCESS, build.getResult());
 
-        EnvCopyAction action = build.getAction(EnvCopyAction.class);
+        EnvMapperAction action = build.getAction(EnvMapperAction.class);
         Assert.assertNotNull(action);
 
         BuildEnvContributorAction contributorAction = build.getAction(BuildEnvContributorAction.class);
@@ -88,7 +88,7 @@ public class BuildEnvPropagationTest {
 
         FreeStyleBuild build = project.scheduleBuild2(0).get();
 
-        EnvCopyAction action = build.getAction(EnvCopyAction.class);
+        EnvMapperAction action = build.getAction(EnvMapperAction.class);
         Assert.assertNotNull(action);
 
         BuildEnvContributorAction contributorAction = build.getAction(BuildEnvContributorAction.class);
@@ -115,7 +115,7 @@ public class BuildEnvPropagationTest {
 
         FreeStyleBuild build = project.scheduleBuild2(0).get();
 
-        EnvCopyAction action = build.getAction(EnvCopyAction.class);
+        EnvMapperAction action = build.getAction(EnvMapperAction.class);
         Assert.assertNotNull(action);
 
         BuildEnvContributorAction contributorAction = build.getAction(BuildEnvContributorAction.class);

@@ -10,10 +10,10 @@ import java.util.Map;
 /**
  * @author Vivek Pandey
  */
-public class EnvCopyAction extends InvisibleAction{
+public class EnvMapperAction extends InvisibleAction{
     private final Map<String,String> customEnvMapping = new HashMap<String, String>();
 
-    public EnvCopyAction(Map<String,String> envVariables) {
+    public EnvMapperAction(Map<String, String> envVariables) {
         customEnvMapping.putAll(envVariables);
     }
 

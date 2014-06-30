@@ -19,12 +19,20 @@
       </developer>
   </developers>
 
+  <url>http://wiki.jenkins-ci.org/display/JENKINS/Build+Env+Propagator+Plugin</url>
+
   <licenses>
     <license>
       <name>MIT License</name>
       <url>http://opensource.org/licenses/MIT</url>
     </license>
   </licenses>
+
+  <scm>
+    <connection>scm:git:ssh://github.com/jenkinsci/envpropagator.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/jenkinsci/envpropagator.git</developerConnection>
+    <url>https://github.com/jenkinsci/envpropagator</url>
+  </scm>
 
   <!-- get every artifact through repo.jenkins-ci.org, which proxies all the artifacts that we need -->
   <repositories>

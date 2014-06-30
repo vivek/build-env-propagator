@@ -37,9 +37,9 @@ public class EnvPropagatorBuilder extends Builder{
 
     @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) {
-        EnvCopyAction action = build.getAction(EnvCopyAction.class);
+        EnvMapperAction action = build.getAction(EnvMapperAction.class);
         if(action == null){ //TODO: should it not be synchronized?
-            action = new EnvCopyAction(mapEnvVariables());
+            action = new EnvMapperAction(mapEnvVariables());
             build.addAction(action);
         }else{
             action.putAll(mapEnvVariables());
