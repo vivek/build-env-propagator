@@ -63,6 +63,9 @@ public class EnvPropagatorBuilder extends Builder{
 
     private Map<String,String> mapEnvVariables(){
         Map<String,String> envVariables = new HashMap<String, String>();
+        if(envVariableString == null){
+            return envVariables;
+        }
         for(String param:envVariableString.split(":")){
             String[] kv=param.split("=");
             if(kv.length ==2){
@@ -125,8 +128,8 @@ public class EnvPropagatorBuilder extends Builder{
          */
         public FormValidation doCheckEnvVariableString(@QueryParameter String value)
                 throws IOException, ServletException {
-            if (value.length() == 0)
-                return FormValidation.error("Please provide env variables in format a=b:c=d.");
+            if (value.length() > 0 && !value.contains("="))
+                return FormValidation.error("Env variables must be in the format a=b:c=d.");
             return FormValidation.ok();
         }
     }
