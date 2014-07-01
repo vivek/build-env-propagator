@@ -72,8 +72,8 @@ public class SetEnvVariablesTest {
                 return true;
             }
         });
-        project.getBuildersList().add(new EnvPropagatorBuilder(null));
-        project.getBuildersList().add(new Shell("java -jar cli.jar set-env-variables -m color=blue -m size=10"));
+        project.getBuildersList().add(new EnvPropagatorBuilder("color=blue:size=10"));
+
         project.getBuildersList().add(new Shell("if [ $color != \"blue\" ]\n" +
                 "  then\n" +
                 "    echo \"Was expecting color to be blue was $color\"\n" +
@@ -86,15 +86,28 @@ public class SetEnvVariablesTest {
                 "    exit 1\n" +
                 "fi\n"));
 
-        project.getBuildersList().add(new Shell("java -jar cli.jar set-env-variables -m color=red -m JOB_NAME=testXXX"));
+        project.getBuildersList().add(new Shell("java -jar cli.jar set-env-variables -m color=purple -m size=20"));
+        project.getBuildersList().add(new Shell("if [ $color != \"purple\" ]\n" +
+                "  then\n" +
+                "    echo \"Was expecting color to be blue was $color\"\n" +
+                "    exit 1\n" +
+                "fi\n" +
+                "\n" +
+                "if [ $size != \"20\" ]\n" +
+                "  then\n" +
+                "    echo \"Was expecting size to be 10 was $size\"\n" +
+                "    exit 1\n" +
+                "fi\n"));
 
+
+        project.getBuildersList().add(new Shell("java -jar cli.jar set-env-variables -m color=red -m JOB_NAME=testXXX"));
         project.getBuildersList().add(new Shell("if [ $color != \"red\" ]\n" +
                 "  then\n" +
                 "    echo \"Was expecting color to be red was $color\"\n" +
                 "    exit 1\n" +
                 "fi\n" +
                 "\n" +
-                "if [ $size != \"10\" ]\n" +
+                "if [ $size != \"20\" ]\n" +
                 "  then\n" +
                 "    echo \"Was expecting size to be 10 was $size\"\n" +
                 "    exit 1\n" +
@@ -106,6 +119,7 @@ public class SetEnvVariablesTest {
                 "    exit 1\n" +
                 "fi\n"));
 
+
         AbstractBuild build = j.assertBuildStatusSuccess(project.scheduleBuild2(0));
 
         EnvMapperAction action = build.getAction(EnvMapperAction.class);
@@ -115,7 +129,7 @@ public class SetEnvVariablesTest {
         Assert.assertNotNull(contributorAction);
 
         Assert.assertEquals(action.getEnvVariables().get("color"), "red");
-        Assert.assertEquals(action.getEnvVariables().get("size"), "10");
+        Assert.assertEquals(action.getEnvVariables().get("size"), "20");
         Assert.assertEquals(action.getEnvVariables().get("JOB_NAME"), "testXXX");
     }
 

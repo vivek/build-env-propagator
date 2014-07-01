@@ -40,8 +40,19 @@ public class SetEnvVariables extends CommandDuringBuild {
     protected int run() throws Exception {
         Run r = getCurrentlyBuilding();
 
-        EnvMapperAction copyAction = r.getAction(EnvMapperAction.class);
-        copyAction.putAll(envVariables);
+        EnvMapperAction action = r.getAction(EnvMapperAction.class);
+        // Perhaps this action has not been added by prior build steps, add it now
+        if(action == null){
+            r.addAction(new EnvMapperAction(envVariables));
+        }else {
+            action.putAll(envVariables);
+        }
+
+        //Make sure contributor action is available to add these action to other builds
+        BuildEnvContributorAction contributorAction = r.getAction(BuildEnvContributorAction.class);
+        if(contributorAction == null) {
+            r.addAction(new BuildEnvContributorAction());
+        }
         return 0;
     }
 
